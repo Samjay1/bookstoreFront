@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 const Register = ()=>{
-    const BASE_URL= 'http://localhost:4000/register';
+    const BASE_URL= 'http://localhost:4000';
 
     const [message, setMessage] = useState('');
     const [email,setEmail] = useState('')
@@ -13,9 +13,7 @@ const Register = ()=>{
     const [password, setPassword] = useState('')
     const [cpassword, setCPassword] = useState('')
     const [errorEmail, setErrorEmail] = useState(false)
-    const [errorEmailMessage, setErrorEmailMessage] = useState('')
-    const [errorName, setErrorName] = useState(false)
-    const [errorNameMessage, setErrorNameMessage] = useState('')
+    const [errorEmailMessage, setErrorEmailMessage] = useState('') 
     const [errorPassword, setErrorPassword] = useState(false)
     const [errorPasswordMessage, setErrorPasswordMessage] = useState('')
     const [errorCPassword, setErrorCPassword] = useState(false)
@@ -24,15 +22,13 @@ const Register = ()=>{
     const OnSubmit = ()=>{
         console.log('email,password,cpassword :>> ', email,password,cpassword);
         setErrorEmail(email.length === 0? true:false)
-        setErrorEmailMessage(email.length === 0 && 'This is a required question')
-        setErrorName(name.length === 0? true:false)
-        setErrorNameMessage(name.length === 0 && 'This is a required question')
+        setErrorEmailMessage(email.length === 0 && 'This is a required question') 
         setErrorPassword(password.length === 0? true:false)
         setErrorPasswordMessage(password.length === 0 && 'This is a required question')
         setErrorCPassword(cpassword.length === 0? true:false)
         setErrorCPasswordMessage(cpassword.length === 0 && 'This is a required question')
         
-        console.log(errorEmail ,errorName ,errorPassword ,errorCPassword)
+        console.log(errorEmail ,errorPassword ,errorCPassword)
         if(password.length < 6){
             setErrorPassword(true)
             setErrorPasswordMessage('Passwords must be 6 or more characters')
@@ -43,7 +39,7 @@ const Register = ()=>{
             setErrorCPasswordMessage('Passwords must be the same')
             return
         }
-        else if( email.length !== 0 && name.length !== 0 && password.length !== 0 && cpassword.length !== 0 ){
+        else if( email.length !== 0 !== 0 && password.length !== 0 && cpassword.length !== 0 ){
             console.log('post now :>> ');
             let body = {
                 name,email,password
@@ -79,11 +75,7 @@ const Register = ()=>{
             case 'email':
                 setEmail(value)
                 setErrorEmail(false)
-                break;
-            case 'name':
-                setName(value)
-                setErrorName(false)
-                break;
+                break; 
             case 'password':
                 setPassword(value)
                 setErrorPassword(false)
@@ -113,16 +105,7 @@ const Register = ()=>{
                     errorState={errorEmail}
                     errorMessage={errorEmailMessage}
                     onValueChange={onValueChange}/>
-
-                    <TextInput 
-                    title={'Name'} 
-                    label={'Enter Organization name'} 
-                    inputname={'name'} 
-                    inputtype={'text'} 
-                    errorState={errorName}
-                    errorMessage={errorNameMessage}
-                    onValueChange={onValueChange}/>
-
+ 
                     <TextInput 
                     title={'Password'} 
                     label={'Enter password'} 
