@@ -7,9 +7,7 @@ import { useEffect, useState } from 'react';
 const List = ()=>{
     const navigator = useNavigate()
 
-    const BASE_URL= 'https://api.castfilegh.com/organiser';
-    const IMAGE_URL= 'https://api.castfilegh.com/';
-    // const TEST_URL= 'http://localhost:7001/organiser';
+    const BASE_URL= 'https://localhost:4000/list';
 
   
     const [response, setResponse] = useState(null);
@@ -39,9 +37,7 @@ const List = ()=>{
             if(searchMatch || searchMatch2 || searchMatch3){
                 return (
                     <div key={index} onClick={()=>{previewClick(value.id)}} className=' grid grid-cols-5 m-5 text-gray-600 rounded-3xl border-2 border-gray-400 hover:border-blue-500 hover:text-blue-600 overflow-hidden'>
-                        <div className='lg:col-span-2 col-span-5 bg-gray-200 h-36'>
-                            <img className='object-cover h-full w-full' src={value.banner_image!==null?`${IMAGE_URL}${value.banner_image}`: `${process.env.PUBLIC_URL}/logo.png`} alt="" />
-                        </div>
+                       
                         <div className='lg:col-span-3 col-span-5 p-1 h-36 space-y-2 px-3'>
                             <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.name}</p>
                             <p className='text-xl font-bold'> {value.title}</p>
@@ -67,13 +63,11 @@ const List = ()=>{
     let list = response?.map((value,index)=>{
         return (
             <div key={index} onClick={()=>{previewClick(value.id)}} className=' grid grid-cols-5 m-5 text-gray-600 rounded-3xl border-2 border-gray-400 hover:border-blue-500 hover:text-blue-600 overflow-hidden'>
-                <div className='lg:col-span-2 col-span-5 bg-gray-200 h-36'>
-                <img className='object-cover h-full w-full' src={value.banner_image!==null?`${IMAGE_URL}${value.banner_image}`: `${process.env.PUBLIC_URL}/logo.png`} alt="" />
-                </div>
+               
                 <div className='lg:col-span-3 col-span-5 p-1 h-36 space-y-2 px-3'>
                     <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.name}</p>
                     <p className='text-xl font-bold'> {value.title}</p>
-                    <article className='truncate text-gray-500 text-md'>{value.description !== 'null' ? value.description: '' }</article>
+                    {/* <article className='truncate text-gray-500 text-md'>{value.description !== 'null' ? value.description: '' }</article> */}
                 </div>
             </div>
         )
@@ -82,11 +76,9 @@ const List = ()=>{
     return(
         <>
             <div className="border border-red-100 my-6 py-4 lg:w-2/4 mx-auto w-11/12 text-gray-700 shadow-lg rounded-3xl">
-                <div>
-                    <img className='h-16 m-auto' src={process.env.PUBLIC_URL+"/logo.png"} alt="" />
-                </div>
-                <p className="text-3xl font-bold text-center ">Nomination <span className='text-red-600'>Forms</span></p>
-                <p className='text-center mx-2'>Search for your Nomination forms</p>
+                
+                <p className="text-3xl font-bold text-center ">BookStore <span className='text-red-600'>APP</span></p>
+                <p className='text-center mx-2'>Search for a Book</p>
 
                 <div className='my-5 md:w-1/2 w-11/12 mx-auto'> 
                     <input onChange={OnSearching} type={'text'} className=" border border-gray-400 rounded-3xl p-3 pl-5 focus:outline-none w-full focus:border-blue-300 text-input rounded-0 pb-2 px-2 hover:bg-blue-50"  placeholder="Type your response"/>

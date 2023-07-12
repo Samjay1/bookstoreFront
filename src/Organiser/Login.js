@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios'
 
 const Login = ()=>{
-    const BASE_URL= 'http://localhost:4000/login';
+    const BASE_URL= 'http://localhost:4000';
 
     // window.sessionStorage.clear();
     const navigator = useNavigate();
@@ -62,11 +62,11 @@ const Login = ()=>{
                     window.sessionStorage.setItem('org_id', org_id)
                     setTimeout(()=>{
                         setMessage('')
-                        navigator(`${process.env.PUBLIC_URL}/dashboard`)
+                        navigator(`${process.env.PUBLIC_URL}/list`)
                     },1000)
                 }
             }).catch((error)=>{
-                setMessage('Login Failed. Activate Account')
+                setMessage('Login Failed')
                 setTimeout(()=>{
                     setMessage('')
                     navigator(`${process.env.PUBLIC_URL}/login`)
