@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react';
 const List = ()=>{
     const navigator = useNavigate()
 
-    const BASE_URL= 'https://localhost:4000/list';
+    const BASE_URL= 'http://localhost:4000';
 
   
     const [response, setResponse] = useState(null);
     useEffect(()=>{
-        axios.get(`${BASE_URL}/search`)
+        axios.get(`${BASE_URL}/list`)
         .then((response)=>{
             console.log('response :>> ', response.data.response);
             if(response.data.status){
@@ -31,18 +31,19 @@ const List = ()=>{
         setSearch(search_value) 
         searchList = response.map((value,index)=>{
             let searchMatch = value.title?.toLowerCase().includes(search_value)
-            let searchMatch2 = value.description?.toLowerCase().includes(search_value)
-            let searchMatch3 = value.name?.toLowerCase().includes(search_value)
+            let searchMatch2 = value.genre?.toLowerCase().includes(search_value)
+            let searchMatch3 = value.author?.toLowerCase().includes(search_value)
             // console.log('value match',searchMatch)
             if(searchMatch || searchMatch2 || searchMatch3){
                 return (
                     <div key={index} onClick={()=>{previewClick(value.id)}} className=' grid grid-cols-5 m-5 text-gray-600 rounded-3xl border-2 border-gray-400 hover:border-blue-500 hover:text-blue-600 overflow-hidden'>
                        
                         <div className='lg:col-span-3 col-span-5 p-1 h-36 space-y-2 px-3'>
-                            <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.name}</p>
-                            <p className='text-xl font-bold'> {value.title}</p>
-                            <article className='truncate text-gray-500 text-md'>{value.description !== 'null' ? value.description: '' }</article>
-                        </div>
+                            <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.author}</p>
+                            <p className='text-xl font-bold'>Title {value.title}</p>
+                            <p className='text-xl font-bold'>Price {value.price}</p>
+                            <p className='text-xl font-bold'>Genre {value.genre}</p>
+                           </div>
                     </div>
                 )
             } else{
@@ -64,10 +65,11 @@ const List = ()=>{
         return (
             <div key={index} onClick={()=>{previewClick(value.id)}} className=' grid grid-cols-5 m-5 text-gray-600 rounded-3xl border-2 border-gray-400 hover:border-blue-500 hover:text-blue-600 overflow-hidden'>
                
-                <div className='lg:col-span-3 col-span-5 p-1 h-36 space-y-2 px-3'>
-                    <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.name}</p>
-                    <p className='text-xl font-bold'> {value.title}</p>
-                    {/* <article className='truncate text-gray-500 text-md'>{value.description !== 'null' ? value.description: '' }</article> */}
+               <div className='lg:col-span-3 col-span-5 p-1 h-36 space-y-2 px-3'>
+                <p className='font-bold text-2xl text-blue-900 lg:text-left text-center lg:mt-0 mt-1'>By {value.author}</p>
+                <p className='text-xl font-bold'>Title {value.title}</p>
+                <p className='text-xl font-bold'>Price {value.price}</p>
+                <p className='text-xl font-bold'>Genre {value.genre}</p>
                 </div>
             </div>
         )
